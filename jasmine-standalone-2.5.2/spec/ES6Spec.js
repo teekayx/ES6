@@ -118,14 +118,16 @@ describe("ES6 features",function(){
     
     describe("const and let", () => {
         it("can shadow outer variable declarations", ()=>{
-            let x = 12;
             
-            () => {
-                var x = 10;
-                expect(x).toBe(10);
-                return 10;
+            const x = 12;
+            var doWork = function() {
+                let x = 10;
+            //    var x = 10;   adding this line will give an error because of redeclaration. same if declared as a const
+                return x;
             }
-            expect(x).toBe(12);
+            
+            let result = doWork()
+            expect(result).toBe(10);
         });
     });
     
